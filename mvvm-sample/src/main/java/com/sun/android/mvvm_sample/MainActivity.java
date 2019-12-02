@@ -1,13 +1,12 @@
-package com.sun.android.sample;
+package com.sun.android.mvvm_sample;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.lifecycle.ViewModelStore;
 
 import android.os.Bundle;
+
+import com.sun.android.mvvm_sample.viewmodle.TestViewModle;
+import com.sun.android.util.Logs;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,5 +15,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		TestViewModle testViewModle = ViewModelProviders.of(this).get(TestViewModle.class);
+		Logs.INSTANCE.D("test msg:"+testViewModle.a);
+
 	}
 }

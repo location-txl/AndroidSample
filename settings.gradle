@@ -1,3 +1,3 @@
-include ':app'
+include ':app', ':mvvm-sample'
 include ':util-lib'
 rootProject.name='AndroidSample'
