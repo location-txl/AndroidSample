@@ -6,7 +6,7 @@ import android.util.Log
  *
  * @author tianxiaolong
  * time：2019/12/2 15:18
- * description：
+ * description：log工具类
  */
 object Logs {
 
@@ -15,11 +15,12 @@ object Logs {
     const val LOG_INFO = 1.shl(1)
     const val LOG_DEBUG = 1.shl(2)
     const val LOG_ERROR = 1.shl(3)
+    //LOG_INFO | LOG_DEBUG | LOG_ERROR
     const val LOG_ALL = LOG_INFO or LOG_DEBUG or LOG_ERROR
 
     var LOG_LEVE = LOG_ALL
 
-    // LOG_INFO | LOG_DEBUG | LOG_ERROR
+    // &
     private fun debug(level: Int) = LOG_LEVE.and(level) == level
 
     @JvmOverloads
