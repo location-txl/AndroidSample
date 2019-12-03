@@ -1,5 +1,6 @@
 package com.sun.android.mvvm_sample.viewmodle;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -9,4 +10,9 @@ import androidx.lifecycle.ViewModel;
  */
 public class TestViewModle extends ViewModel {
 	public int a =0;
+	public MutableLiveData<String> liveData = new MutableLiveData<>();
+
+	public void setValue(String msg){
+		liveData.postValue(msg);
+	}
 }
