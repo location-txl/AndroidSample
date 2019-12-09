@@ -6,7 +6,7 @@ package androidx.lifecycle;
  * time：2019/12/3 16:26
  * description：
  */
-public class ObserverWrapper<T>
+ class ObserverWrapper<T>
 		implements Observer<Object> {
 
 	private Observer<T> wrapper;
@@ -36,12 +36,16 @@ public class ObserverWrapper<T>
 
 	}
 
-	protected boolean isStick() {
-		return false;
+	 boolean isStick() {
+		return stick;
 	}
 
 	void setStick(boolean stick) {
 		this.stick = stick;
+	}
+
+	void openStick(){
+		this.stick = true;
 	}
 
 

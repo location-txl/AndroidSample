@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
  * time：2019/12/3 16:29
  * description：
  */
-public class BusLiveData<T> extends LiveData<T> {
+ class BusLiveData<T> extends LiveData<T> {
 
-	private  String key;
+	private  final String key;
 
 	public BusLiveData(String key) {
 		super();
@@ -20,9 +20,7 @@ public class BusLiveData<T> extends LiveData<T> {
 	}
 
 
-	public BusLiveData(T value) {
-		super(value);
-	}
+
 
 	@Override
 	public void removeObserver(@NonNull Observer<? super T> observer) {
