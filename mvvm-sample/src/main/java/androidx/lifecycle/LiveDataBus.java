@@ -36,6 +36,9 @@ public class LiveDataBus {
 	}
 
 	private BusLiveData<Object> getChannelLiveData(final String key) {
+		if(channelMap == null){
+			channelMap = new HashMap<>();
+		}
 		return channelMap.computeIfAbsent(key, new Function<String, BusLiveData<Object>>() {
 			@Override
 			public BusLiveData<Object> apply(String s) {

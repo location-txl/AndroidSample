@@ -4,7 +4,9 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
-
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.sun.android.mvvm_sample"
         minSdkVersion 24
