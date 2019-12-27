@@ -10,7 +10,7 @@ import android.util.Log
  */
 object Logs {
 
-    const val TAG = "[Log]"
+    const val TAG = "AndroidSample"
     // 1 << 1
     const val LOG_INFO = 1.shl(1)
     const val LOG_DEBUG = 1.shl(2)
@@ -24,17 +24,16 @@ object Logs {
     private fun debug(level: Int) = LOG_LEVE.and(level) == level
 
     @JvmOverloads
-    fun I(msg: String, tag: String = TAG) {
-        if (debug(LOG_INFO)) Log.i(tag,msg)
+    fun I(tag: String = TAG, msg: String) {
+        if (debug(LOG_INFO)) Log.i(tag, msg)
     }
 
     @JvmOverloads
-    fun D(msg: String, tag: String = TAG) {
-        if (debug(LOG_DEBUG)) Log.d(tag, formatString(tag,msg))
+    fun D(tag: String = TAG, msg: String) {
+        if (debug(LOG_DEBUG)) Log.d(tag, formatString(tag, msg))
     }
 
-    private  fun formatString(tag:String,msg:String) = if(tag == TAG) "[$msg]" else msg
-
+    private fun formatString(tag: String, msg: String) = if (tag == TAG) "[$msg]" else msg
 
 
 }

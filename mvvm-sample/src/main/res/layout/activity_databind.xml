@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:bind="http://schemas.android.com/apk/res-auto">
+<!--	class 指定别名-->
+	<data class="DataBindingSample">
+		<!--这里定义数据-->
+		<!-- name 变量名  type 类型-->
+		<!--	这里导入自定义的类-->
+		<import type="com.sun.android.mvvm_sample.databinding.UserData"/>
+<!--		使用静态方法-->
+		<import type="com.sun.android.mvvm_sample.databinding.BinderAdapterUtils"/>
+
+		<import type="com.sun.android.mvvm_sample.databinding.StringUtils"/>
+		<import type="android.view.View"/>
+		<!--		如果后缀一样 可以使用alias指定别名-->
+		<import
+			alias="TempUser"
+			type="com.sun.android.mvvm_sample.databinding.UserData" />
+		<variable
+			name="user"
+			type="UserData" />
+		<variable
+			name="title"
+			type="String" />
+		<variable
+			name="onclick"
+			type="android.view.View.OnClickListener" />
+		<variable
+			name="list"
+			type="androidx.databinding.ObservableArrayList&lt;String>" />
+		<variable
+			name="datachange"
+			type="com.sun.android.mvvm_sample.databinding.DataChangeListener" />
+		<variable
+			name="bindUtil"
+			type="BinderAdapterUtils" />
+	</data>
+	<!--	default属性只会在预览视图中显示-->
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<Button
+			android:id="@+id/data_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="测试" />
+
+		<TextView
+			android:id="@+id/titleView"
+			android:textColor="#000"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@{title,default=sss}" />
+		<Button
+			android:onClick="@{onclick}"
+			android:text="刷新UserData"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+		<TextView
+			android:id="@+id/textList"
+			android:layout_width="wrap_content"
+			android:text='@{list[0],default = "测试"}'
+			android:layout_height="wrap_content"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:id="@+id/user_name_text"
+			android:text="@{StringUtils.formatString(user.name)}"
+			android:layout_height="wrap_content"/>
+<!--		下方的等价于  user.name!=null?user.name:user.defaultName-->
+		<TextView
+			android:visibility="@{user.vissable ? View.VISIBLE : View.GONE}"
+			android:text="@{user.name??user.defaultName}"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+		<Button
+			android:id="@+id/button_user_content"
+			android:text="获取edittext内容"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+<!--双向数据绑定 edit内容更改时 更新userdata的信息-->
+		<EditText
+			android:id="@+id/editText"
+			android:afterTextChanged="@{datachange.textChange}"
+			android:onTextChanged="@{(msg,start,before,count) -> datachange.text(msg)}"
+			android:text="@={user.content}"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
+		<CheckBox
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:setOnCheckedChangeListener="@{(view,state) -> user.setVissable(state)}"
+			android:text="显示view" />
+<include layout="@layout/include_databing"
+	bind:user="@{user}"/>
+<!--		viewstub 的databinding-->
+<!--		这里一定要加id-->
+		<ViewStub
+			android:id="@+id/sub_s"
+			bind:subuser="@{user}"
+			android:layout="@layout/view_stub"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+		<ImageView
+			android:src="@mipmap/ic_launcher"
+			android:id="@+id/user_image"
+			bind:url="@{user.url}"
+			android:layout_width="300dp"
+			android:layout_height="300dp"/>
+		<Button
+			android:id="@+id/test_button"
+			android:layout_width="wrap_content"
+			android:text="@{user.name}"
+			android:layout_height="wrap_content"/>
+		<Button
+			android:id="@+id/jump_binderMethod"
+			android:text="跳转Bindermethod"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+	</LinearLayout>
+
+	</ScrollView>
+</layout>
