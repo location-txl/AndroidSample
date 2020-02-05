@@ -1,4 +1,2 @@
-
-include ':app', ':mvvm-sample', ':lifecycle-sample'
-include ':util-lib'
+include ':app', ':sample-view'
 rootProject.name='AndroidSample'
