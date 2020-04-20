@@ -8,7 +8,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/lifecycle-sample" />
+            <option value="$PROJECT_DIR$/livedata-sample" />
+            <option value="$PROJECT_DIR$/mvvm-sample" />
+            <option value="$PROJECT_DIR$/sample-view" />
             <option value="$PROJECT_DIR$/util-lib" />
           </set>
         </option>

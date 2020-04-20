@@ -1,4 +1,4 @@
 
-include ':app', ':mvvm-sample', ':sample-view',':lifecycle-sample'
+include ':app', ':mvvm-sample', ':sample-view',':lifecycle-sample', ':livedata-sample'
 include ':util-lib'
 rootProject.name='AndroidSample'
