@@ -59,7 +59,7 @@ public class DataBindingActivity extends AppCompatActivity {
 activityDatabindBinding.testButton.setOnClickListener(v ->
 	startActivity(new Intent(this,BinderDataSampleActivity.class))
 );
-activityDatabindBinding.jumpBinderMethod.setOnClickListener(v -> UtilsKt.startActivity(this, BindingMethodActivity.class));
+activityDatabindBinding.jumpBinderMethod.setOnClickListener(v -> startActivity(new Intent(this,BindingMethodActivity.class))/*UtilsKt.startActivity(this, BindingMethodActivity.class)*/);
 	}
 
 }

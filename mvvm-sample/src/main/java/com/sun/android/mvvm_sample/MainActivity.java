@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 					@Override
 					public void onClick(View v) {
 //						LiveDataBus.getDefault().postValue("test","hhhhh");
-						UtilsKt.startActivity(MainActivity.this,TestActivity.class);
+						//UtilsKt.startActivity(MainActivity.this,TestActivity.class);
 					}
 				});
 
