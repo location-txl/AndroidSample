@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 31
 
     dataBinding {
         enabled = true
@@ -10,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.sun.android.mvvm_sample"
         minSdkVersion 24
-        targetSdkVersion 29
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -33,8 +32,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation project(":util-lib")
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
