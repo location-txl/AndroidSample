@@ -1,3 +1,4 @@
 include ':app', ':mvvm-sample',':sample-view'
 include ':util-lib'
 rootProject.name='AndroidSample'
+include ':flowsample'
