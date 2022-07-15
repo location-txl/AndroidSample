@@ -38,4 +38,22 @@
 		app:layout_constraintTop_toBottomOf="@id/shareFlowBtn"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"/>
+
+	<Button
+		android:layout_marginTop="20dp"
+		android:text="跳转到新界面"
+		android:id="@+id/jumpNewPageFlowBtn"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/registerShareFlowBtn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+
+	<Button
+		android:layout_marginTop="20dp"
+		android:text="弹出toast"
+		android:id="@+id/toastBtn"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/jumpNewPageFlowBtn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

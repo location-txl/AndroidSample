@@ -1,10 +1,13 @@
 package com.location.flowsample
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,6 +27,9 @@ class MainViewModel : ViewModel() {
 
     val shareFlow:SharedFlow<String> = _shareFlow.asSharedFlow()
 
+    private val _shareToastFlow:MutableSharedFlow<String> = MutableSharedFlow(replay = 0)
+
+    val toastFlow:SharedFlow<String> = _shareToastFlow.asSharedFlow()
 
     private var stateFlowCount = 0
     private var shareFlowCount = 0
@@ -46,6 +52,13 @@ class MainViewModel : ViewModel() {
                 Log.i("txlTest","end send shareflow Count:$shareFlowCount")
 //            }
 
+        }
+    }
+
+
+    fun toast(){
+        viewModelScope.launch {
+            _shareToastFlow.emit("toast消息")
         }
     }
 
