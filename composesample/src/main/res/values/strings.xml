@@ -1,0 +1,5 @@
+<resources>
+	<string name="app_name">ComposeSample</string>
+	<string name="screen_weight">控件</string>
+	<string name="screen_layout">布局</string>
+</resources>
