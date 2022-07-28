@@ -46,13 +46,11 @@ class MainActivity : ComponentActivity() {
             //添加底部导航栏
             BottomBar(navController)
         }) {
-
-
             NavHost(navController = navController, startDestination = Screen.Weight.rotateName) {
-                composable(Screen.Weight.rotateName) {
+                composeForPadding(it,Screen.Weight.rotateName) {
                     ScreenWeight(nav = navController)
                 }
-                composable(Screen.Layout.rotateName) {
+                composeForPadding(it,Screen.Layout.rotateName) {
                     ScreenLayout(nav = navController)
                 }
             }
