@@ -2,7 +2,6 @@ package com.location.composesample
 
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -11,8 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -21,14 +19,16 @@ import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -39,11 +39,18 @@ import androidx.navigation.NavHostController
  * time：2022/7/20 15:56
  * description：
  */
+@Composable
+fun WeightGraph(nav: NavHostController,  modifier: Modifier = Modifier){
+    ScreenWeight(modifier)
+}
 
 @Composable
-fun ScreenWeight(nav: NavHostController, modifier: Modifier = Modifier) {
+fun ScreenWeight(modifier: Modifier = Modifier) {
     Log.d("txlTest", "ScreenWeight")
-    Column(modifier.padding(16.dp).fillMaxHeight()) {
+                                                                                 Column(
+                                                                                     modifier
+                                                                                         .padding(16.dp)
+                                                                                         .fillMaxHeight()) {
         LazyColumn {
             itemTitle("文本控件") {
                 Text(text = "粗体文本", fontWeight = FontWeight.Bold)
@@ -132,6 +139,51 @@ fun ScreenWeight(nav: NavHostController, modifier: Modifier = Modifier) {
                     onValueChange = {
                         text4 = it
                     })
+
+                var text5 by remember {
+                    mutableStateOf("")
+                }
+                var text5Vis by remember {
+                    mutableStateOf(false)
+                }
+                //设置密码框
+                TextField(value = text5,
+                    modifier = Modifier.padding(bottom = 10.dp),
+                    leadingIcon = {
+                        Icon(Icons.Default.Search, null)
+                    },
+                    label = {
+                        //设置提示文字
+                        Text(text = "请输入密码")
+                    },
+                    trailingIcon = {
+                        Button(onClick = { text5Vis = !text5Vis }) {
+                           Text(text = if (text5Vis) "隐藏" else "显示")
+                        }
+                    },
+                    //显示模式
+                    visualTransformation = if (text5Vis) {
+                        VisualTransformation.None
+                    } else {
+                        //这里设置密码框的显示模式
+                        PasswordVisualTransformation(mask = '*')
+                    },
+                    //输入英文和字符
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii),
+                    singleLine = true,
+                    onValueChange = {
+                        text5 = it.trim()
+                    })
+
+                Text(text = "BaseTextField 更多自定义")
+                var text6 by remember {
+                    mutableStateOf("1234567")
+                }
+                BasicTextField(value = text6,
+                    modifier = Modifier.padding(bottom = 10.dp),
+                    onValueChange = {
+                    text6 = it
+                })
             }
         }
     }
@@ -152,8 +204,14 @@ inline fun LazyListScope.itemTitle(
     }
 }
 
+
 @Composable
-fun ScreenLayout(nav: NavHostController) {
+fun LayoutGraph(nav: NavHostController,  modifier: Modifier = Modifier){
+    ScreenLayout(modifier)
+}
+
+@Composable
+fun ScreenLayout( modifier: Modifier = Modifier) {
 
 //    Text(text = "ScreenLayout")
     //页面切换后保存状态
@@ -175,4 +233,10 @@ fun ScreenLayout(nav: NavHostController) {
             Text(text = "点击")
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ScreenWeightPreview() {
+    ScreenWeight()
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -46,12 +47,12 @@ class MainActivity : ComponentActivity() {
             //添加底部导航栏
             BottomBar(navController)
         }) {
-            NavHost(navController = navController, startDestination = Screen.Weight.rotateName) {
-                composeForPadding(it,Screen.Weight.rotateName) {
-                    ScreenWeight(nav = navController)
+            NavHost(navController = navController, startDestination = Screen.Weight.rotateName, modifier =  Modifier.padding(it)) {
+                composable(Screen.Weight.rotateName) {
+                    WeightGraph(navController)
                 }
-                composeForPadding(it,Screen.Layout.rotateName) {
-                    ScreenLayout(nav = navController)
+                composable(Screen.Layout.rotateName) {
+                    LayoutGraph(navController)
                 }
             }
         }
