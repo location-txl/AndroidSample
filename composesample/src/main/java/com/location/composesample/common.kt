@@ -2,14 +2,15 @@ package com.location.composesample
 
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -18,14 +19,16 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -176,18 +179,71 @@ fun ScreenWeight(modifier: Modifier = Modifier) {
                     })
 
                 Text(text = "BaseTextField 更多自定义")
-                var text6 by remember {
-                    mutableStateOf("1234567")
-                }
-                BasicTextField(value = text6,
-                    modifier = Modifier.padding(bottom = 10.dp),
-                    onValueChange = {
-                    text6 = it
-                })
+                SearchEdittext()
             }
+
+
+
         }
     }
 }
+
+@Composable
+fun SearchEdittext() {
+    var text by remember {
+        mutableStateOf("")
+    }
+    Row(
+        verticalAlignment = Alignment.CenterVertically, modifier = Modifier
+            .fillMaxWidth()
+            .background(color = Color(0xFF101324))
+            .padding(10.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .background(Color(0xFF3F51B5), RoundedCornerShape(20.dp))
+                .padding(top = 10.dp, bottom = 10.dp)
+                .weight(1.0f)
+        ) {
+            BasicTextField(value = text,
+                onValueChange = {
+                    text = it
+                },
+                decorationBox = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(horizontal = 10.dp)
+                    ) {
+                        Icon(painterResource(R.drawable.search_icon), null)
+                        Box(Modifier.weight(1f)) {
+                            it()
+                        }
+                        if (text.isNotEmpty()) {
+                            Image(
+                                painterResource(R.drawable.delete_icon),
+                                null,
+                                modifier = Modifier
+                                    .clickable {
+                                        text = ""
+                                    })
+                        }
+                    }
+                }
+            )
+        }
+        Text(
+            text = "取消",
+            modifier = Modifier
+                .padding(start = 10.dp)
+                .clickable {
+                    text = ""
+                },
+            color = Color.White
+        )
+    }
+}
+
+
 
 inline fun LazyListScope.itemTitle(
     title: String,
@@ -240,3 +296,57 @@ fun ScreenLayout( modifier: Modifier = Modifier) {
 fun ScreenWeightPreview() {
     ScreenWeight()
 }
+
+@Preview(showBackground = true)
+@Composable
+fun searchEdittextPreview() {
+    SearchEdittext()
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun testEdittext(){
+    LazyColumn{
+        items(35){
+            Text(
+                text = "占位符$it",
+                style = MaterialTheme.typography.h6,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+        item {
+            var text by remember {
+                mutableStateOf("")
+            }
+            TextField(
+                value = text,
+                onValueChange = {
+                    text = it
+                },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = {
+                    Text(text = "TextField")
+                }
+            )
+        }
+
+        item {
+            var text by remember {
+                mutableStateOf("")
+            }
+            BasicTextField(
+                value = text,
+                onValueChange = {
+                    text = it
+                },
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .background(Color.Red),
+            )
+        }
+    }
+}
+
+
