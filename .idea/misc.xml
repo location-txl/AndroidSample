@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/compose-model-1659011411625.xml" value="0.25" />
         <entry key="flowsample/src/main/res/layout/activity_main.xml" value="0.15989583333333332" />
         <entry key="flowsample/src/main/res/layout/activity_second.xml" value="0.21302083333333333" />
         <entry key="mvvm-sample/src/main/res/layout/activity_databind.xml" value="0.17291666666666666" />

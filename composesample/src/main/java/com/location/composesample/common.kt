@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -180,6 +181,25 @@ fun ScreenWeight(modifier: Modifier = Modifier) {
 
                 Text(text = "BaseTextField 更多自定义")
                 SearchEdittext()
+                Text(text = "OutlinedTextField")
+                var text6 by remember {
+                    mutableStateOf("")
+                }
+                var isError by remember {
+                    mutableStateOf(false)
+                }
+                OutlinedTextField(
+                    value = text6,
+                    onValueChange = {
+                        text6 = it
+                        isError = text6.length > 6
+                    },
+                    isError = isError,
+                    label = {
+                        //设置提示文字
+                        Text(text = "输入6个字符以内")
+                    },
+                )
             }
 
 
