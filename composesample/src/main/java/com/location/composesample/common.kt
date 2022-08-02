@@ -5,6 +5,8 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
@@ -201,8 +203,61 @@ fun ScreenWeight(modifier: Modifier = Modifier) {
                     },
                 )
             }
+            itemTitle("按钮"){
+                val context = LocalContext.current
+                Button(
+                    onClick = {
+                    Toast.makeText(context, "点击按钮", Toast.LENGTH_SHORT).show()
+                }
+                ) {
+                    Text(text = "普通按钮")
+                }
 
+                FloatingActionButton(onClick = {
+                    Toast.makeText(context, "点击按钮FloatingActionButton", Toast.LENGTH_SHORT).show()
+                }, modifier = Modifier
+                    .size(100.dp)
+                    .padding(10.dp)) {
+                    Text(text = "浮动按钮")
+                }
 
+                IconButton(onClick = {  }) {
+                    Icon(Icons.Default.Search, null)
+                }
+
+                Button(onClick = { }) {
+                    Icon(Icons.Default.Search, null)
+                    Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+                    Text(text = "带图标的按钮")
+
+                }
+
+                Button(
+                    onClick = { },
+                    colors = ButtonDefaults.outlinedButtonColors(),
+                ) {
+                    Text(text = "自定义按钮")
+                }
+                val interactionState = remember { MutableInteractionSource() }
+                val (text, textColor, buttonColor) = when {
+                    interactionState.collectIsPressedAsState().value -> ButtonState(
+                        "按下状态",
+                        Color.Red,
+                        Color.Black
+                    )
+                    else -> ButtonState("正常状态", Color.White, Color.Red)
+                }
+                Button(
+                    onClick = { },
+                    interactionSource = interactionState,
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = buttonColor,
+                    ),
+                    modifier = Modifier.padding(10.dp),
+                ) {
+                    Text(text = text, color = textColor)
+                }
+            }
 
         }
     }
@@ -368,5 +423,8 @@ fun testEdittext(){
         }
     }
 }
+
+
+data class ButtonState(val text: String, val textColor: Color, val backgroundColor: Color)
 
 
