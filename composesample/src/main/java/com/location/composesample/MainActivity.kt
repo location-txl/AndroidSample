@@ -3,7 +3,6 @@ package com.location.composesample
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -13,7 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -21,12 +19,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.location.composesample.bottom.Screen
+import com.location.composesample.bottom.HomeScreen
 import com.location.composesample.ui.theme.AndroidSampleTheme
 
 class MainActivity : ComponentActivity() {
     private val homeList by lazy {
-        listOf(Screen.Weight, Screen.Layout)
+        listOf(HomeScreen.Weight, HomeScreen.Layout)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,13 +45,38 @@ class MainActivity : ComponentActivity() {
             //添加底部导航栏
             BottomBar(navController)
         }) {
-            NavHost(navController = navController, startDestination = Screen.Weight.rotateName, modifier =  Modifier.padding(it)) {
-                composable(Screen.Weight.rotateName) {
-                    WeightGraph(navController)
-                }
-                composable(Screen.Layout.rotateName) {
+            NavHost(
+                navController = navController,
+                startDestination = HomeScreen.Weight.rotateName,
+                modifier = Modifier.padding(it)
+            ) {
+
+                weightGraph(
+                    navigateRotate = {
+                            route ->
+                        navController.navigate(route = route)
+                    },
+                    back = {
+                        navController.popBackStack()
+                    }
+                )
+//                composable(HomeScreen.Weight.rotateName) {
+//                    WeightGraph(
+//                        navController, items = listOf(
+//                            "Button",
+//                            "Text",
+//                            "TextFiled",
+//                            "CheckBox",
+//                            "RadioButton",
+//                            "Slider",
+//                            "Snackbar"
+//                        )
+//                    )
+//                }
+                composable(HomeScreen.Layout.rotateName) {
                     LayoutGraph(navController)
                 }
+
             }
         }
     }
