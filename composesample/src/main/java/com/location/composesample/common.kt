@@ -1,7 +1,9 @@
 package com.location.composesample
 
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,6 +35,7 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -181,25 +184,24 @@ fun CheckBoxText(
     text: String,
     initChecked: Boolean,
     modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    enabled:Boolean = true,
     onCheckedChange: (Boolean) -> Unit,
 ) {
     var value by remember(initChecked) {
         mutableStateOf(initChecked)
     }
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
-//        Checkbox(
-//            checked = value,
-//            onCheckedChange = {
-//                value = it
-//                onCheckedChange(it)
-//            }
-//        )
-        RadioButton(selected = value,
-            modifier = Modifier.background(Color.Red),
-            onClick = {
-            value = !value
-        })
-        Text(text = text)
+        Checkbox(
+            checked = value,
+            enabled = enabled,
+            interactionSource = interactionSource,
+            onCheckedChange = {
+                value = it
+                onCheckedChange(it)
+            }
+        )
+        Text(text = text, color = LocalContentColor.current.copy(alpha = if (enabled) 1f else 0.5f))
     }
 
 }
@@ -209,6 +211,50 @@ fun CheckBoxText(
 fun PreviewCheckBoxText() {
     CheckBoxText("checkbox", false) {
         Log.d("txlTest", "checkbox:$it")
+    }
+}
+
+
+@Composable
+fun IconCheckBox(
+    checked: Boolean,
+    text: String,
+    modifier: Modifier = Modifier,
+    checkStyle: IconCheckBoxStyle = LocalIconCheckStyle.current,
+    space: Dp? = null,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onCheckedChange: (Boolean) -> Unit
+) {
+    val nowSpace = space ?: checkStyle.space
+    IconButton(
+        onClick = {
+            onCheckedChange(!checked)
+        },
+        modifier = modifier,
+        interactionSource = interactionSource,
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Image(
+                painterResource(id = if (checked) LocalIconCheckStyle.current.checkedRes else LocalIconCheckStyle.current.uncheckedRes),
+                null
+            )
+            Spacer(modifier = Modifier.size(width = nowSpace, height = 0.dp))
+            Text(text = text, color = LocalContentColor.current.copy(alpha = if (checked) 1f else 0.5f))
+        }
+
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewIconCheckBox() {
+    var checked by remember {
+        mutableStateOf(false)
+    }
+    IconCheckBox(checked, "选择框1"){
+        checked = it
     }
 }
 
@@ -283,4 +329,9 @@ fun testEdittext() {
 
 data class ButtonState(val text: String, val textColor: Color, val backgroundColor: Color)
 
+
+data class IconCheckBoxStyle(@DrawableRes val checkedRes: Int, @DrawableRes val uncheckedRes: Int, val space: Dp = 2.dp)
+
+
+val LocalIconCheckStyle = staticCompositionLocalOf { IconCheckBoxStyle(R.drawable.check_box_checked, R.drawable.check_box_normal) }
 

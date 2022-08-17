@@ -18,10 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.location.composesample.bottom.HomeScreen
 import com.location.composesample.bottom.WeightScreen
-import com.location.composesample.weight.WeightButton
-import com.location.composesample.weight.WeightImage
-import com.location.composesample.weight.WeightText
-import com.location.composesample.weight.WeightTextField
+import com.location.composesample.weight.*
 
 /**
  *
@@ -53,6 +50,7 @@ fun NavGraphBuilder.weightGraph(navigateRotate: (String) -> Unit, back: () -> Un
                     "Text" -> navigateRotate(WeightScreen.Text.rotateName)
                     "TextFiled" -> navigateRotate(WeightScreen.TextFiled.rotateName)
                     "Image" -> navigateRotate(WeightScreen.Image.rotateName)
+                    "CheckBox" -> navigateRotate(WeightScreen.CheckBox.rotateName)
                 }
             }
         }
@@ -67,6 +65,9 @@ fun NavGraphBuilder.weightGraph(navigateRotate: (String) -> Unit, back: () -> Un
         }
         composable(route = WeightScreen.Image.rotateName){
             WeightImage(back)
+        }
+        composable(route = WeightScreen.CheckBox.rotateName){
+            WeightCheckbox(back)
         }
     }
 
