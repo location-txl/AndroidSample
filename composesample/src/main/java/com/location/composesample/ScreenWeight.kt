@@ -51,6 +51,7 @@ fun NavGraphBuilder.weightGraph(navigateRotate: (String) -> Unit, back: () -> Un
                     "TextFiled" -> navigateRotate(WeightScreen.TextFiled.rotateName)
                     "Image" -> navigateRotate(WeightScreen.Image.rotateName)
                     "CheckBox" -> navigateRotate(WeightScreen.CheckBox.rotateName)
+                    "RadioButton" -> navigateRotate(WeightScreen.RadioButton.rotateName)
                 }
             }
         }
@@ -68,6 +69,9 @@ fun NavGraphBuilder.weightGraph(navigateRotate: (String) -> Unit, back: () -> Un
         }
         composable(route = WeightScreen.CheckBox.rotateName){
             WeightCheckbox(back)
+        }
+        composable(route = WeightScreen.RadioButton.rotateName){
+            WeightRadioButton(back)
         }
     }
 

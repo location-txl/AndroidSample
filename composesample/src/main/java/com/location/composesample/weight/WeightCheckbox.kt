@@ -31,7 +31,7 @@ fun WeightCheckbox(back: () -> Unit) {
 
             }
 
-            Text(text = "自定义复选框", style = MaterialTheme.typography.h1)
+            Text(text = "自定义复选框", style = MaterialTheme.typography.h6)
             var checked by remember {
                 mutableStateOf(false)
             }
