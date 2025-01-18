@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.serialization)
+
 }
 
 android {
@@ -56,4 +60,20 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    /* hilt start */
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    /* hilt end */
+
+    /* kotlin serialization start */
+    implementation(libs.kotlinx.serialization.json)
+    /* kotlin serialization end */
+
+    /* retrofit start */
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.retrofit.kotlin.serialization)
+    /* retrofit end */
 }
