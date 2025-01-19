@@ -1,3 +1,7 @@
+/**
+ * The plugins block is used to apply Gradle plugins to the project.
+ * Plugins can add new tasks, extend the build script, and provide additional functionality.
+ */
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,9 +9,12 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.serialization)
-
 }
 
+/**
+ * The android block is used to configure the Android-specific settings for the project.
+ * This includes settings like the namespace, compile SDK version, default configuration, build types, and more.
+ */
 android {
     namespace = "com.location.androidsample"
     compileSdk = 35
@@ -43,6 +50,10 @@ android {
     }
 }
 
+/**
+ * The dependencies block is used to declare the dependencies for the project.
+ * Dependencies can be libraries, modules, or other projects that the current project depends on.
+ */
 dependencies {
 
     implementation(libs.androidx.core.ktx)

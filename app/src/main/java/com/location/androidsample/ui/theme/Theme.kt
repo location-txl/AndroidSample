@@ -33,6 +33,11 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+/**
+ * AndroidSampleTheme is a composable function that sets the theme for the app.
+ * It applies the appropriate color scheme based on the system's dark theme setting
+ * and the dynamic color setting.
+ */
 @Composable
 fun AndroidSampleTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
